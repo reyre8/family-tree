@@ -17,7 +17,7 @@ function Node(member, partner=null) {
  * node.
  *
  * @param {Integer} Level of the ancestor to find
- * @return {Object} The parent found, otherwise, it returns null
+ * @return {Node} The parent found, otherwise, it returns null
  */
 Node.prototype.findAncestor = function(level) {
   let parent = this;
@@ -58,6 +58,24 @@ Tree.prototype.traverse = function(callback) {
 };
 
 /**
+ * Searches for a node that matches the given name, with either
+ * member.name or partner.name
+ *
+ * @param {String} name Name to be used in the search
+ * @return {Node} Returns the node if it's found. Otherwise returns null
+ */
+Tree.prototype.find = function(name) {
+  var nodeToFind = null;
+  this.traverse.call(this, function(node) {
+    if((node.member.name === name) || ((node.partner) && (node.partner.name === name))) {
+      nodeToFind = node;
+    }
+  });
+  return nodeToFind;
+}
+
+
+/**
  * Adds a new node (created with member and partner), to a node that matches the
  * given parent name
  *
@@ -67,28 +85,18 @@ Tree.prototype.traverse = function(callback) {
  * @return {String} Result of the operation
  */
 Tree.prototype.add = function(parentName, member, partner=null) {
-  var child = new Node(member, partner),
-      result = null,
-      parent = null,
-      callback = function(node) {
-        if((node.member.name === parentName) || ((node.partner) && (node.partner.name === parentName))) {
-          let targetType = (node.member.name === parentName)?'member':'partner';
-          if(node[targetType] && node[targetType].isFemale()) {
-            parent = node;
-          } else {
-            result = 'CHILD_ADDITION_FAILED';
-          }
-        }
-      };
-  this.traverse.call(this, callback);
-  if (parent) {
-    parent.children.push(child);
-    child.parent = parent;
-    result = 'CHILD_ADDED';
-  } else {
-    result = result || 'PERSON_NOT_FOUND';
-  }
-  return result;
+  let parent = this.find(parentName);
+  if (!parent)
+    return 'PERSON_NOT_FOUND';
+
+  let targetType = (parent.member.name === parentName)?'member':'partner';
+  if (!parent[targetType].isFemale()) 
+    return 'CHILD_ADDITION_FAILED';
+
+  let child = new Node(member, partner);
+  child.parent = parent;
+  parent.children.push(child);
+  return 'CHILD_ADDITION_SUCCEEDED';
 };
 
 /**
@@ -100,63 +108,68 @@ Tree.prototype.add = function(parentName, member, partner=null) {
  * @return {String} Result of the operation
  */
 Tree.prototype.search = function(name, relation) {
-  if (!relationships.hasOwnProperty(relation)) {
+  if (!relationships.hasOwnProperty(relation))
     return 'INVALID_RELATION';
-  }
-  var result = [],
-      targetParent = null,
-      targetNode = null,
-      targetType = null,
-      callback = function(node) {
-        if ((node.member.name  === name) || (node.partner && node.partner.name === name)) {
-          targetNode = node;
-          targetType = (node.member.name === name)?'partner':'member';
-          targetParent = node.findAncestor(relationships[relation].parentLevel); 
-        }
-      };
-  this.traverse.call(this, callback);
-  if (targetNode) {
-    this.traverse.call(this, function(node) {
-      if ((node !== targetNode) && (targetParent === node.parent)) {
-        switch(relation) {
-          case 'Siblings':
-            if (targetType === 'partner') {
-              result.push(node.member.name);
-            }
-            break;
-          case 'Sister-In-Law':
-          case 'Brother-In-Law':
-            if ((node[targetType]) && (node[targetType].gender === relationships[relation].gender)) {
-              result.push(node[targetType].name);
-            }
-            break;
-          case 'Son':
-          case 'Daughter':
-            if (node.member.gender === relationships[relation].gender) {
-              result.push(node.member.name);
-            }
-            break;
-          case 'Maternal-Aunt':
-          case 'Paternal-Aunt':  
-          case 'Maternal-Uncle':
-          case 'Paternal-Uncle':
-            if ((targetNode.parent.member.gender === relationships[relation].parentGender) && 
-                (node !== targetNode.parent) && 
-                (node.member.gender === relationships[relation].gender)) {
-                result.push(node.member.name);
-              }
-            break;
-          default:
-            throw Error('INVALID_RELATION');
-            break;
-        }
-      }
-    });
-  } else {
-    result.push('PERSON_NOT_FOUND');
-  }
+
+  let targetNode = this.find(name);
+  if (!targetNode)
+    return 'PERSON_NOT_FOUND';
+
+  let targetType = (targetNode.member.name === name)?'partner':'member';
+  let targetParent = targetNode.findAncestor(relationships[relation].parentLevel); 
+  let result = this.findRelatives(relation, targetNode, targetParent, targetType);
   return (result.length>0)?result.join(' '):'NONE';
 };
+
+/**
+ * Find relatives for a given targetNode according and to the relation provided
+ * @param {String} name Name of the person to search the relatives for
+ * @param {Person} relation Type of relation (defined on const relationships)
+ * @return {String} Result of the operation
+ */
+Tree.prototype.findRelatives = function (relation, targetNode, targetParent, targetType) {
+  var result = [];
+  this.traverse.call(this, function(node) {
+    if ((node !== targetNode) && (targetParent === node.parent)) {
+      switch(relation) {
+        case 'Siblings':
+          if (targetType === 'partner') {
+            result.push(node.member.name);
+          }
+          break;
+        case 'Sister-In-Law':
+        case 'Brother-In-Law':
+          if ((node[targetType]) && (node[targetType].gender === relationships[relation].gender)) {
+            result.push(node[targetType].name);
+          }
+          break;
+        case 'Son':
+        case 'Daughter':
+          if (node.member.gender === relationships[relation].gender) {
+            result.push(node.member.name);
+          }
+          break;
+        case 'Maternal-Aunt':
+        case 'Paternal-Aunt':  
+        case 'Maternal-Uncle':
+        case 'Paternal-Uncle':
+          if ((targetNode.parent.member.gender === relationships[relation].parentGender) && 
+              (node !== targetNode.parent) && 
+              (node.member.gender === relationships[relation].gender)) {
+              result.push(node.member.name);
+            }
+          break;
+        default:
+          throw Error('INVALID_RELATION');
+          break;
+      }
+    }
+  });
+  return result;
+}
+
+
+
 
 // Object of properties for each relation
 const relationships = {

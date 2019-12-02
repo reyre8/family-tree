@@ -27,6 +27,9 @@ TreeOperation.prototype.execute = function(operation=[]) {
       case 'GET_RELATIONSHIP':
         return this.tree.search(operation[1], operation[2]);
         break;
+      default:
+        return 'INVALID_OPERATION';
+        break;
     }
   }
 }
