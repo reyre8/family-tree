@@ -1,35 +1,4 @@
-/**
- * Class that controls the nodes added to a tree
- *
- * @param {Person} member The direct member of the family
- * @param {Person} partner If provided, the members partner
- */
-function Node(member, partner=null) {
-    this.member = member;
-    this.partner = partner;
-    this.parent = null;
-    this.children = [];
-}
-
-/**
- * Finds in the node, the parent ancestor indicated on level.
- * If the level provided is 0, the function returns the same
- * node.
- *
- * @param {Integer} Level of the ancestor to find
- * @return {Node} The parent found, otherwise, it returns null
- */
-Node.prototype.findAncestor = function(level) {
-  let parent = this;
-  for(let i=0; i<level; i++) {
-    if (parent.hasOwnProperty('parent')) {
-      parent = parent.parent;
-    } else {
-      return null;
-    }
-  }
-  return parent;
-}
+FamilyNode = require('./family-node');
 
 /**
  * Class that controls the tree structure
@@ -37,8 +6,8 @@ Node.prototype.findAncestor = function(level) {
  * @param {Person} member The direct member of the family
  * @param {Person} partner If provided, the members partner
  */
-function Tree(member, partner=null) {
-    var node = new Node(member, partner);
+function FamilyTree(member, partner=null) {
+    var node = new FamilyNode(member, partner);
     this._root = node;
 }
 
@@ -48,7 +17,7 @@ function Tree(member, partner=null) {
  * @param {function} callback Callback to be executed for every node that
  * is visited
  */
-Tree.prototype.traverse = function(callback) {
+FamilyTree.prototype.traverse = function(callback) {
   (function recurse(currentNode) {
     for (var i = 0, length = currentNode.children.length; i < length; i++) {
       recurse(currentNode.children[i]);
@@ -62,9 +31,9 @@ Tree.prototype.traverse = function(callback) {
  * member.name or partner.name
  *
  * @param {String} name Name to be used in the search
- * @return {Node} Returns the node if it's found. Otherwise returns null
+ * @return {FamilyNode} Returns the node if it's found. Otherwise returns null
  */
-Tree.prototype.find = function(name) {
+FamilyTree.prototype.find = function(name) {
   var nodeToFind = null;
   this.traverse.call(this, function(node) {
     if((node.member.name === name) || ((node.partner) && (node.partner.name === name))) {
@@ -84,7 +53,7 @@ Tree.prototype.find = function(name) {
  * @param {Person} partner If provided, the members partner
  * @return {String} Result of the operation
  */
-Tree.prototype.add = function(parentName, member, partner=null) {
+FamilyTree.prototype.add = function(parentName, member, partner=null) {
   let parent = this.find(parentName);
   if (!parent)
     return 'PERSON_NOT_FOUND';
@@ -93,7 +62,7 @@ Tree.prototype.add = function(parentName, member, partner=null) {
   if (!parent[targetType].isFemale()) 
     return 'CHILD_ADDITION_FAILED';
 
-  let child = new Node(member, partner);
+  let child = new FamilyNode(member, partner);
   child.parent = parent;
   parent.children.push(child);
   return 'CHILD_ADDITION_SUCCEEDED';
@@ -107,7 +76,7 @@ Tree.prototype.add = function(parentName, member, partner=null) {
  * @param {Person} relation Type of relation (defined on const relationships)
  * @return {String} Result of the operation
  */
-Tree.prototype.search = function(name, relation) {
+FamilyTree.prototype.search = function(name, relation) {
   if (!relationships.hasOwnProperty(relation))
     return 'INVALID_RELATION';
 
@@ -127,7 +96,7 @@ Tree.prototype.search = function(name, relation) {
  * @param {Person} relation Type of relation (defined on const relationships)
  * @return {String} Result of the operation
  */
-Tree.prototype.findRelatives = function (relation, targetNode, targetParent, targetType) {
+FamilyTree.prototype.findRelatives = function (relation, targetNode, targetParent, targetType) {
   var result = [];
   this.traverse.call(this, function(node) {
     if ((node !== targetNode) && (targetParent === node.parent)) {
@@ -167,9 +136,6 @@ Tree.prototype.findRelatives = function (relation, targetNode, targetParent, tar
   });
   return result;
 }
-
-
-
 
 // Object of properties for each relation
 const relationships = {
@@ -215,4 +181,4 @@ const relationships = {
   },
 };
 
-module.exports = Tree;
+module.exports = FamilyTree;

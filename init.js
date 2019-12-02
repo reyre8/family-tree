@@ -1,13 +1,13 @@
 const Person = require('./src/person');
-const Tree = require('./src/tree');
+const FamilyTree = require('./src/family-tree');
 
 /**
  * Initialises a tree with default data
  *
- * @return {Tree} familyTree
+ * @return {FamilyTree} familyTree
  */
 function loadTree() {
-  var familyTree = new Tree(new Person('King Arthur', 'Male'), new Person('Queen Margret', 'Female'));
+  var familyTree = new FamilyTree(new Person('King Arthur', 'Male'), new Person('Queen Margret', 'Female'));
   familyTree.add('Queen Margret', new Person('Bill', 'Male'), new Person('Flora', 'Female'));
   familyTree.add('Queen Margret', new Person('Charlie', 'Male'));
   familyTree.add('Queen Margret', new Person('Percy', 'Male'), new Person('Audrey', 'Female'));
