@@ -20,11 +20,17 @@ lx
     ├── tree.js
     └── treeOperation.js
 ```
+
+In order to install the application, run the following command:
+```sh
+npm install
+```
+
 In order to execute the application, run  the following command:
 ```sh
-node main.js filePath
+npm start [-- filePath]
 ```
-Where `filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `data/default-input.txt`
+Where `-- filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `data/default-input.txt`
 
 ### Assumptions
 
