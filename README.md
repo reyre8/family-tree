@@ -8,17 +8,20 @@ No particular dependencies were used in the implementation.
 ### Steps to test
 Once the project folder has been unzipped, open a console, and navigate to the root of the projects folder. The structure of the project should be like the following:
 ```sh
-lx
+lx/
 ├── README.md
 ├── data
 │   └── default-input.txt
 ├── geektrust.js
 ├── init.js
+├── package-lock.json
 ├── package.json
-└── src
-    ├── person.js
-    ├── tree.js
-    └── treeOperation.js
+├── src
+│   ├── family-node.js
+│   ├── family-tree-operation.js
+│   ├── family-tree.js
+│   └── person.js
+└── tests
 ```
 
 In order to install the application, run the following command:
