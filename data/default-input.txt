@@ -1,5 +1,6 @@
 ADD_CHILD Flora Minerva Female
 ADD_CHILD Flora Reynaldo Male
+ADD_CHILD Flora Tamara Female
 GET_RELATIONSHIP Remus Maternal-Aunt
 GET_RELATIONSHIP Minerva Siblings
 ADD_CHILD Luna Lola Female

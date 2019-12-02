@@ -1,5 +1,5 @@
-const Person = require('./person');
-const Tree = require('./tree');
+const Person = require('./src/person');
+const Tree = require('./src/tree');
 
 /**
  * Initialises a tree with default data

@@ -8,19 +8,28 @@ No particular dependencies were used in the implementation.
 ### Steps to test
 Once the project folder has been unzipped, open a console, and navigate to the root of the projects folder. The structure of the project should be like the following:
 ```sh
-├── default-input.txt
-├── init.js
-├── main.js
-├── person.js
+lx
 ├── README.md
-├── tree.js
-└── treeOperation.js
+├── data
+│   └── default-input.txt
+├── geektrust.js
+├── init.js
+├── package.json
+└── src
+    ├── person.js
+    ├── tree.js
+    └── treeOperation.js
 ```
 In order to execute the application, run  the following command:
 ```sh
 node main.js filePath
 ```
-Where `filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `default-input.txt`
+Where `filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `data/default-input.txt`
+
+### Assumptions
+
+  - 
+
 
 ### Improvements to implement
 

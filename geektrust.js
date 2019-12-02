@@ -1,12 +1,12 @@
 const fs = require('fs');
 const readline = require('readline');
 const init = require('./init');
-const Tree = require('./tree');
-const TreeOperation = require('./treeOperation');
+const Tree = require('./src/tree');
+const TreeOperation = require('./src/treeOperation');
 
 // Define file path to be processed
 const args = process.argv.slice(2);
-var path = (args.length>0)?args[0]:'default-input.txt';
+var path = (args.length>0)?args[0]:'./data/default-input.txt';
 
 // Verify if file exists
 if (!fs.existsSync(path)) {

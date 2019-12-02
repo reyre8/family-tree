@@ -1,0 +1,11 @@
+{
+  "name": "family",
+  "version": "1.0.0",
+  "description": "GeekTrust Test for LEXICON",
+  "main": "geektrust.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Reynaldo Rojas",
+  "license": "ISC"
+}
