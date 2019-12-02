@@ -4,7 +4,8 @@
   "description": "GeekTrust Test for LEXICON",
   "main": "geektrust.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node geektrust.js"
   },
   "author": "Reynaldo Rojas",
   "license": "ISC",
