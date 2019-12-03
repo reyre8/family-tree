@@ -13,18 +13,24 @@ if (!fs.existsSync(path)) {
   return;
 }
 
-// Load initial tree
-var tree = init.loadTree();
-var familyTreeOperation = new FamilyTreeOperation(tree);
-
 // Initialise readStream
 const readInterface = readline.createInterface({
     input: fs.createReadStream(path)
 });
 
+// Load initial tree
+var tree = init.loadTree();
+
+var familyTreeOperation = new FamilyTreeOperation(tree);
+
 // Evaluate lines on the file as operations
 readInterface.on('line', function(line) {
   var operation = line.split(/(\s+)/).filter(function(e) {return e.trim().length > 0;});
-  var result = familyTreeOperation.execute(operation);
-  console.log(result);
+  
+  try {
+    var result = familyTreeOperation.execute(operation);
+    console.log(result);
+  } catch(error) {
+    console.log(error.toString());
+  }
 });

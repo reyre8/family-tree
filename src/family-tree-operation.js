@@ -1,4 +1,5 @@
 const Person = require('./person');
+const FamilyNode = require('./family-node');
 
 /**
  * Class that controls the operation performed on a FamilyTree Object
@@ -22,7 +23,7 @@ FamilyTreeOperation.prototype.execute = function(operation=[]) {
   } else {
     switch(operation[0]) {
       case 'ADD_CHILD':
-        return this.familyTree.add(operation[1], new Person(operation[2], operation[3]));
+        return this.familyTree.add(operation[1], new FamilyNode(new Person(operation[2], operation[3])));
         break;
       case 'GET_RELATIONSHIP':
         return this.familyTree.search(operation[1], operation[2]);
