@@ -8,7 +8,7 @@ No particular dependencies were used in the implementation.
 ### Steps to test
 Once the project folder has been unzipped, open a console, and navigate to the root of the projects folder. The structure of the project should be like the following:
 ```sh
-lx/
+lx
 ├── README.md
 ├── data
 │   └── default-input.txt
@@ -20,8 +20,12 @@ lx/
 │   ├── family-node.js
 │   ├── family-tree-operation.js
 │   ├── family-tree.js
-│   └── person.js
+│   ├── person.js
+│   └── relationship-matrix.js
 └── tests
+    ├── family-node.test.js
+    ├── family-tree.test.js
+    └── person.test.js
 ```
 
 In order to install the application, run the following command:
@@ -35,6 +39,11 @@ npm start [-- filePath]
 ```
 Where `-- filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `data/default-input.txt`
 
+In order to test the application, run the following command:
+```sh
+npm test
+```
+
 ### Assumptions
 
   - 
@@ -44,10 +53,8 @@ Where `-- filePath` is the path of the file to be tested. If the parameter `file
 
   - Implement ESLINT linter.
   - Sanitise operation entries.
-  - Integrate app with unit test engine. Also implement unit tests.
   - Typecast parameters on classes constructors.
   - More dependency injection where applicable.
-  - Throw errors where applicable, and wrap executions on try-catch.
   - Override Person.gender set method, so the value of gender cannot be hijacked (This applies to the rest of the classes properties).
   - Improve input file validation.
 
