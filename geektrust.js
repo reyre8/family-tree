@@ -20,7 +20,6 @@ const readInterface = readline.createInterface({
 
 // Load initial tree
 var tree = init.loadTree();
-
 var familyTreeOperation = new FamilyTreeOperation(tree);
 
 // Evaluate lines on the file as operations

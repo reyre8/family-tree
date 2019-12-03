@@ -24,8 +24,11 @@ lx
 │   └── relationship-matrix.js
 └── tests
     ├── family-node.test.js
+    ├── family-tree-operation.test.js
     ├── family-tree.test.js
-    └── person.test.js
+    ├── person.test.js
+    └── provider
+        └── family-tree-provider.js
 ```
 
 In order to install the application, run the following command:
@@ -52,7 +55,6 @@ npm test
 ### Improvements to implement
 
   - Implement ESLINT linter.
-  - Sanitise operation entries.
   - Typecast parameters on classes constructors.
   - More dependency injection where applicable.
   - Override Person.gender set method, so the value of gender cannot be hijacked (This applies to the rest of the classes properties).
