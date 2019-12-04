@@ -50,7 +50,7 @@ class Person {
     if (!gender)
       throw Error('[PERSON_ERROR]-GENDER_COMPULSORY');
     if(![GENDER_FEMALE, GENDER_MALE].includes(gender))
-      throw Error('[PERSON_ERROR]-INVALID_GENDER]');
+      throw Error('[PERSON_ERROR]-INVALID_GENDER');
     return true
   }
 }

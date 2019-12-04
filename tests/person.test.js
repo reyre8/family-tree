@@ -27,7 +27,7 @@ describe('Test - person: constructor()', () => {
     expect(() => {
       const person = new Person('Reynaldo', 'Invalid-Gender');
     }).toThrowError(
-      Error('[PERSON_ERROR]-INVALID_GENDER]')
+      Error('[PERSON_ERROR]-INVALID_GENDER')
     );
   });
 });

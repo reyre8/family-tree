@@ -38,7 +38,7 @@ module.exports = {
         new Person('Ruben', 'Male'),
         new Person('Natalia', 'Female')
       ),
-      uncle_2: new FamilyNode(
+      uncle2: new FamilyNode(
         new Person('Rich', 'Male'),
       ),
       aunt: new FamilyNode(

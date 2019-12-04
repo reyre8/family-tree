@@ -105,7 +105,7 @@ describe('Test - family-tree: search()', () => {
     familyTree = new FamilyTree(Provider.search().grandParent);
     familyTree.add('Tamara', Provider.search().parent);
     familyTree.add('Tamara', Provider.search().uncle);
-    familyTree.add('Tamara', Provider.search().uncle_2);
+    familyTree.add('Tamara', Provider.search().uncle2);
     familyTree.add('Tamara', Provider.search().aunt);
     familyTree.add('Sabrina', Provider.search().son);
     familyTree.add('Natalia', Provider.search().daughter);

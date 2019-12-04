@@ -1,5 +1,6 @@
 const Person = require('./person');
 const FamilyNode = require('./family-node');
+const FamilyTree = require('./family-tree');
 
 /**
  * Class that controls the operation performed on a FamilyTree Object
@@ -12,7 +13,8 @@ class FamilyTreeOperation {
    * @param {FamilyTree} Object on which the operations are going to be performed
    */
   constructor(familyTree) {
-    this.familyTree = familyTree;
+    if (this.validate(familyTree))
+      this.familyTree = familyTree;
   }
 
   /**
@@ -22,7 +24,7 @@ class FamilyTreeOperation {
    * @return {String} Operation result
    */
   execute(operation=[]) {
-    var error = this.validate(operation);
+    let error = this.validateOperation(operation);
     if(error) {
       return error;
     } else {
@@ -46,24 +48,41 @@ class FamilyTreeOperation {
    * @param {Array} operation Collection that contains the operation with arguments
    * @return {String} Validation error if exists, otherwise null
    */
-  validate(operation=[]) {
+  validateOperation(operation) {
+    if (!Array.isArray(operation))
+      throw Error('OPERATION_SHOULD_BE_ARRAY');
     switch(operation[0]) {
       case 'ADD_CHILD':
         if(operation.length !== 4) {
-          return 'ADD_CHILD_ERROR[INVALID_ARGUMENT_NUMBER]'
+          throw Error('[ADD_CHILD_ERROR]-INVALID_ARGUMENT_NUMBER');
         }
         break;
       case 'GET_RELATIONSHIP':
         if(operation.length !== 3) {
-          return 'GET_RELATIONSHIP_ERROR[INVALID_ARGUMENT_NUMBER]'
+          throw Error('[GET_RELATIONSHIP_ERROR]-INVALID_ARGUMENT_NUMBER');
         }
         break;
       default:
-        return 'INVALID_OPERATION';
+        throw Error('INVALID_OPERATION');
         break;
     }
     return null;
   }
+
+  /**
+  * Verifies if the property familyNode is valid
+  *
+  * @param {FamilyNode} familyNode
+  * @return {Boolean} true if no errors, otherwise, it throws an Error
+  */
+  validate(familyTree) {
+    if (!familyTree)
+      throw Error('[FAMILY_TREE_OPERATION_ERROR]-FAMILY_TREE_COMPULSORY');
+    if (!(familyTree instanceof FamilyTree))
+      throw Error('[FAMILY_TREE_OPERATION_ERROR]-INVALID_FAMILY_TREE');
+    return true
+  }
+
 }
 
 module.exports = FamilyTreeOperation;
