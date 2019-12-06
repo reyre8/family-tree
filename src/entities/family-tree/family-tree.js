@@ -1,4 +1,4 @@
-FamilyNode = require('./family-node');
+FamilyNode = require('./../family-node');
 relationships = require('./relationship-matrix');
 
 /**

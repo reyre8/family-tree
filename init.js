@@ -1,6 +1,6 @@
-const Person = require('./src/person');
-const FamilyTree = require('./src/family-tree');
-const FamilyNode = require('./src/family-node');
+const Person = require('./src/entities/person');
+const FamilyTree = require('./src/entities/family-tree/family-tree');
+const FamilyNode = require('./src/entities/family-node');
 
 /**
  * Initialises a tree with default data

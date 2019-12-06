@@ -1,15 +1,10 @@
-const Person = require('./../../src/person');
-const FamilyNode = require('./../../src/family-node');
-const FamilyTree = require('./../../src/family-tree');
+const FamilyNodeFactory = require('./../../../src/factories/family-node-factory');
+const FamilyTreeFactory = require('./../../../src/factories/family-tree-factory');
 
 module.exports = {
   constructor: () => {
-    return new FamilyTree(
-      new FamilyNode(
-        new Person('Reynaldo', 'Male'),
-        new Person('Tamara', 'Female')
-      )
-    );
+    let familyNode = FamilyNodeFactory('Reynaldo', 'Male', 'Tamara', 'Female');
+    return FamilyTreeFactory(familyNode);
   },
   execute: () => {
     return {

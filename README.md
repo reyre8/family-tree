@@ -17,20 +17,30 @@ lx
 ├── package-lock.json
 ├── package.json
 ├── src
-│   ├── family-node.js
-│   ├── family-tree-operation.js
-│   ├── family-tree.js
-│   ├── person.js
-│   └── relationship-matrix.js
+│   ├── entities
+│   │   ├── family-node.js
+│   │   ├── family-tree
+│   │   │   ├── family-tree.js
+│   │   │   └── relationship-matrix.js
+│   │   ├── family-tree-operation.js
+│   │   └── person.js
+│   └── factories
+│       ├── family-node-factory.js
+│       ├── family-tree-factory.js
+│       ├── family-tree-operation-factory.js
+│       └── person-factory.js
 └── tests
-    ├── family-node.test.js
-    ├── family-tree-operation.test.js
-    ├── family-tree.test.js
-    ├── person.test.js
-    └── provider
-        ├── family-node-provider.js
-        ├── family-tree-operation-provider.js
-        └── family-tree-provider.js
+    ├── entities
+    │   ├── family-node.test.js
+    │   ├── family-tree-operation.test.js
+    │   ├── family-tree.test.js
+    │   ├── person.test.js
+    │   └── provider
+    │       ├── family-node-provider.js
+    │       ├── family-tree-operation-provider.js
+    │       └── family-tree-provider.js
+    └── factories
+        └── provider
 ```
 
 In order to install the application, run the following command:

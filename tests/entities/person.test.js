@@ -1,4 +1,4 @@
-const Person = require('./../src/person');
+const Person = require('./../../src/entities/person');
 
 describe('Test - person: constructor()', () => {
   it('Should have properties name and gender', () => {

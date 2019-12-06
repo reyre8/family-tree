@@ -1,5 +1,4 @@
-const Person = require('./../src/person');
-const FamilyNode = require('./../src/family-node');
+const FamilyNode = require('./../../src/entities/family-node');
 const Provider = require('./provider/family-node-provider');
 
 describe('Test - family-node: constructor()', () => {

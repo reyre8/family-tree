@@ -1,6 +1,5 @@
-const Person = require('./person');
-const FamilyNode = require('./family-node');
-const FamilyTree = require('./family-tree');
+const FamilyTree = require('./family-tree/family-tree');
+const FamilyNodeFactory = require('./../factories/family-node-factory');
 
 /**
  * Class that controls the operation performed on a FamilyTree Object
@@ -30,7 +29,7 @@ class FamilyTreeOperation {
     } else {
       switch(operation[0]) {
         case 'ADD_CHILD':
-          return this.familyTree.add(operation[1], new FamilyNode(new Person(operation[2], operation[3])));
+          return this.familyTree.add(operation[1], FamilyNodeFactory(operation[2], operation[3]));
           break;
         case 'GET_RELATIONSHIP':
           return this.familyTree.search(operation[1], operation[2]);

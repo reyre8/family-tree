@@ -1,7 +1,7 @@
 const fs = require('fs');
 const readline = require('readline');
 const init = require('./init');
-const FamilyTreeOperation = require('./src/family-tree-operation');
+const FamilyTreeOperationFactory = require('./src/factories/family-tree-operation-factory');
 
 // Define file path to be processed
 const args = process.argv.slice(2);
@@ -20,12 +20,11 @@ const readInterface = readline.createInterface({
 
 // Load initial tree
 var tree = init.loadTree();
-var familyTreeOperation = new FamilyTreeOperation(tree);
+var familyTreeOperation = FamilyTreeOperationFactory(tree);
 
 // Evaluate lines on the file as operations
 readInterface.on('line', function(line) {
   var operation = line.split(/(\s+)/).filter(function(e) {return e.trim().length > 0;});
-  
   try {
     var result = familyTreeOperation.execute(operation);
     console.log(result);

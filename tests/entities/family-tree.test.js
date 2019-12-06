@@ -1,4 +1,4 @@
-const FamilyTree = require('./../src/family-tree');
+const FamilyTree = require('./../../src/entities/family-tree/family-tree');
 const Provider = require('./provider/family-tree-provider');
 
 describe('Test - family-tree: constructor()', () => {
