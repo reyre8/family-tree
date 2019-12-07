@@ -14,6 +14,14 @@ module.exports = {
         'Sabrina',
         'Female'
       ],
+      addChildWithPartner: [
+        'ADD_CHILD_WITH_PARTNER',
+        'Tamara',
+        'Sabrina',
+        'Female',
+        'Jordan',
+        'Male'
+      ],
       getRelationship: [
         'GET_RELATIONSHIP',
         'Reynaldo',
@@ -42,6 +50,12 @@ module.exports = {
       invalidAddChild: [
         'ADD_CHILD',
         'Tamara'
+      ],
+      invalidAddChildWithPartner: [
+        'ADD_CHILD_WITH_PARTNER',
+        'Tamara',
+        'Sabrina',
+        'Male'
       ],
       invalidGetRelationship: [
         'GET_RELATIONSHIP',

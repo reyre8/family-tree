@@ -12,9 +12,11 @@ lx
 ├── README.md
 ├── config.js
 ├── data
-│   └── default-input.txt
+│   ├── default-input.txt
+│   ├── initial-input.txt
+│   └── root-node.js
 ├── geektrust.js
-├── init.js
+├── init-family-tree.js
 ├── package-lock.json
 ├── package.json
 ├── src
@@ -69,23 +71,9 @@ In order to execute the application, run  the following command:
 ```sh
 npm start [-- filePath]
 ```
-Where `-- filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `data/default-input.txt`
+Where `-- filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `data/default-input.txt`. This parameter can be found in the file `config.js`
 
 In order to test the application, run the following command:
 ```sh
 npm test
 ```
-
-### Assumptions
-
-  - 
-
-
-### Improvements to implement
-
-  - Implement ESLINT linter.
-  - Typecast parameters on classes constructors.
-  - More dependency injection where applicable.
-  - Override Person.gender set method, so the value of gender cannot be hijacked (This applies to the rest of the classes properties).
-  - Improve input file validation.
-

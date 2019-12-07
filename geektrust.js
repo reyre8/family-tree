@@ -1,4 +1,4 @@
-const init = require('./init');
+const initFamilyTree = require('./init-family-tree');
 const config = require('./config');
 const FamilyTreeInstructionFactory = require('./src/factories/family-tree-instruction-factory');
 
@@ -7,7 +7,12 @@ const args = process.argv.slice(2);
 let filePath = (args.length>0)?args[0]:config.defaultInput;
 
 // Load initial tree
-let familyTree = init.loadTree();
+let familyTree = initFamilyTree();
 let familyTreeInstruction = FamilyTreeInstructionFactory(familyTree);
+
+// Load tree with initial data
+familyTreeInstruction.processFromFile(config.initialInput);
+
+// Run input file with instructions
 const result = familyTreeInstruction.processFromFile(filePath);
 result.map((lineResult) => console.log(lineResult));

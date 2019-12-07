@@ -1,4 +1,4 @@
 module.exports = {
-  initInput: './data/init-input.txt',
+  initialInput: './data/initial-input.txt',
   defaultInput: './data/default-input.txt'
 }

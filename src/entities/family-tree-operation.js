@@ -31,6 +31,9 @@ class FamilyTreeOperation {
         case 'ADD_CHILD':
           return this.familyTree.add(operation[1], FamilyNodeFactory(operation[2], operation[3]));
           break;
+        case 'ADD_CHILD_WITH_PARTNER':
+          return this.familyTree.add(operation[1], FamilyNodeFactory(operation[2], operation[3], operation[4], operation[5]));
+          break;
         case 'GET_RELATIONSHIP':
           return this.familyTree.search(operation[1], operation[2]);
           break;
@@ -54,6 +57,11 @@ class FamilyTreeOperation {
       case 'ADD_CHILD':
         if(operation.length !== 4) {
           throw Error('[ADD_CHILD_ERROR]-INVALID_ARGUMENT_NUMBER');
+        }
+        break;
+      case 'ADD_CHILD_WITH_PARTNER':
+        if(operation.length !== 6) {
+          throw Error('[ADD_CHILD_WITH_PARTNER]-INVALID_ARGUMENT_NUMBER');
         }
         break;
       case 'GET_RELATIONSHIP':

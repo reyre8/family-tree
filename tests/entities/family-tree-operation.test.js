@@ -49,6 +49,11 @@ describe('Test - family-tree-operation: execute()', () => {
     const received = familyTreeOperation.execute(Provider.execute().addChild);
     expect(received).toBe(expected);
   });
+  it('Should execute ADD_CHILD_WITH_PARTNER operation', () => {
+    expected = 'CHILD_ADDITION_SUCCEEDED';
+    const received = familyTreeOperation.execute(Provider.execute().addChildWithPartner);
+    expect(received).toBe(expected);
+  });
   it('Should execute GET_RELATIONSHIP operation', () => {
     expected = 'Sabrina';
     familyTreeOperation.execute(Provider.execute().addChild);
@@ -93,6 +98,13 @@ describe('Test - family-tree-operation: validateOperation()', () => {
       familyTreeOperation.validateOperation(Provider.validateOperation().invalidAddChild);
     }).toThrowError(
       Error('[ADD_CHILD_ERROR]-INVALID_ARGUMENT_NUMBER')
+    );
+  });
+  it('Should throw Error, when ADD_CHILD_WITH_PARTNER operation has wrong number of arguments.', () => {
+    expect(() => {
+      familyTreeOperation.validateOperation(Provider.validateOperation().invalidAddChildWithPartner);
+    }).toThrowError(
+      Error('[ADD_CHILD_WITH_PARTNER]-INVALID_ARGUMENT_NUMBER')
     );
   });
   it('Should throw Error, when GET_RELATIONSHIP operation has wrong number of arguments.', () => {

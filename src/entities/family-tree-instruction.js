@@ -53,15 +53,19 @@ class FamilyTreeInstruction {
   }
 
   /**
-  * Splits the instruction line by the separator ' ', and returns
-  * an array with the elements returned from the split. 
+  * Splits the instruction line by the separator ' ', excluding spaces in
+  * double quotes (i.e. "foo bar"). The function returns an array with
+  * the elements returned from the split. 
   * @param {String} - line instruction line
-  * @return {Array} Instruction as an array
+  * @return {Array} Instructions as an array
   */
   formatInstructionLine(line) {
-    if (typeof line !== 'string')
+    if ((typeof line !== 'string'))
       throw Error(`INVALID_LINE`);
-    return line.split(/(\s+)/).filter(function(e) {return e.trim().length > 0;});
+    let matches = line.match(/(?:[^\s"]+|"[^"]*")+/g);
+    if (Array.isArray(matches))
+      return matches.map((item) => item.replace(/"/g, ''));
+    return [];
   }
 
   /**
