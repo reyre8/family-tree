@@ -10,6 +10,7 @@ Once the project folder has been unzipped, open a console, and navigate to the r
 ```sh
 lx
 ├── README.md
+├── config.js
 ├── data
 │   └── default-input.txt
 ├── geektrust.js
@@ -22,25 +23,41 @@ lx
 │   │   ├── family-tree
 │   │   │   ├── family-tree.js
 │   │   │   └── relationship-matrix.js
+│   │   ├── family-tree-instruction.js
 │   │   ├── family-tree-operation.js
 │   │   └── person.js
 │   └── factories
 │       ├── family-node-factory.js
 │       ├── family-tree-factory.js
+│       ├── family-tree-instruction-factory.js
 │       ├── family-tree-operation-factory.js
 │       └── person-factory.js
 └── tests
     ├── entities
     │   ├── family-node.test.js
+    │   ├── family-tree-instruction.test.js
     │   ├── family-tree-operation.test.js
     │   ├── family-tree.test.js
     │   ├── person.test.js
     │   └── provider
+    │       ├── data
+    │       │   └── test-input.txt
     │       ├── family-node-provider.js
+    │       ├── family-tree-instruction-provider.js
     │       ├── family-tree-operation-provider.js
     │       └── family-tree-provider.js
     └── factories
+        ├── family-node-factory.test.js
+        ├── family-tree-factory.test.js
+        ├── family-tree-instruction-factory.test.js
+        ├── family-tree-operation-factory.test.js
+        ├── person-factory.test.js
         └── provider
+            ├── family-node-factory-provider.js
+            ├── family-tree-factory-provider.js
+            ├── family-tree-instruction-factory-provider.js
+            ├── family-tree-operation-factory-provider.js
+            └── person-factory-provider.js
 ```
 
 In order to install the application, run the following command:

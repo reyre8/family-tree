@@ -1,0 +1,2 @@
+ADD_CHILD Tamara Sabrina Female
+GET_RELATIONSHIP Reynaldo Daughter
