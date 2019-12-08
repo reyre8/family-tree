@@ -9,6 +9,7 @@ No particular dependencies were used in the implementation.
 Once the project folder has been unzipped, open a console, and navigate to the root of the projects folder. The structure of the project should be like the following:
 ```sh
 lx
+├── .eslintrc.json
 ├── README.md
 ├── config.js
 ├── data

@@ -1,8 +1,7 @@
 module.exports = {
-  params: () => {
-    return {
+  params: () =>
+    ({
       name: 'Reynaldo',
-      gender: 'Male'
-    }
-  }
-}
+      gender: 'Male',
+    }),
+};

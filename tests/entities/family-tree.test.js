@@ -1,47 +1,44 @@
 const FamilyTree = require('./../../src/entities/family-tree/family-tree');
 const Provider = require('./provider/family-tree-provider');
 
+/* eslint-disable no-new */
 describe('Test - family-tree: constructor()', () => {
   it('Should have property _root, and match FamilyNode Object', () => {
-	  const expected = {
+    const expected = {
       _root: {
         member: {
           name: 'Reynaldo',
-          gender: 'Male'
+          gender: 'Male',
         },
         partner: null,
         parent: null,
-        children: []
-      }
-    }
+        children: [],
+      },
+    };
     const familyTree = new FamilyTree(Provider.constructor());
     expect(familyTree).toMatchObject(expected);
   });
   it('Should throw Error, when familyNode is invalid.', () => {
     expect(() => {
       const familyNode = 'INVALID-FAMILY-NODE';
-      const familyTree = new FamilyTree(familyNode);
-    }).toThrowError(
-      Error('[FAMILY_TREE_ERROR]-INVALID_FAMILY_NODE')
-    );
+      new FamilyTree(familyNode);
+    }).toThrowError(Error('[FAMILY_TREE_ERROR]-INVALID_FAMILY_NODE'));
   });
   it('Should throw Error, when familyNode is not provided.', () => {
     expect(() => {
-      const familyNode = new FamilyTree();
-    }).toThrowError(
-      Error('[FAMILY_TREE_ERROR]-NAME_COMPULSORY')
-    );
+      new FamilyTree();
+    }).toThrowError(Error('[FAMILY_TREE_ERROR]-NAME_COMPULSORY'));
   });
 });
 
 describe('Test - family-tree: traverse()', () => {
-  var familyTree;
+  let familyTree;
   beforeEach(() => {
     familyTree = new FamilyTree(Provider.constructor());
   });
   it('Should match array ["Reynaldo-Male"]', () => {
     const expected = ['Reynaldo-Male'];
-    var received = [];
+    const received = [];
     familyTree.traverse((node) => {
       received.push(`${node.member.name}-${node.member.gender}`);
     });
@@ -50,7 +47,7 @@ describe('Test - family-tree: traverse()', () => {
 });
 
 describe('Test - family-tree: find()', () => {
-  var familyTree;
+  let familyTree;
   beforeEach(() => {
     familyTree = new FamilyTree(Provider.find());
   });
@@ -69,8 +66,8 @@ describe('Test - family-tree: find()', () => {
 });
 
 describe('Test - family-tree: add()', () => {
-  var familyTree;
-  var newFamilyNode;
+  let familyTree;
+  let newFamilyNode;
   beforeEach(() => {
     familyTree = new FamilyTree(Provider.add().parent);
     newFamilyNode = Provider.add().child;
@@ -84,7 +81,7 @@ describe('Test - family-tree: add()', () => {
     familyTree.add('Tamara', newFamilyNode);
     const node = familyTree.find('Sabrina');
     const expected = 'Sabrina-Female';
-    const received = `${node.member.name}-${node.member.gender}`
+    const received = `${node.member.name}-${node.member.gender}`;
     expect(received).toBe(expected);
   });
   it('Should return PERSON_NOT_FOUND, if person is not found', () => {
@@ -100,7 +97,7 @@ describe('Test - family-tree: add()', () => {
 });
 
 describe('Test - family-tree: search()', () => {
-  var familyTree;
+  let familyTree;
   beforeEach(() => {
     familyTree = new FamilyTree(Provider.search().grandParent);
     familyTree.add('Tamara', Provider.search().parent);
@@ -111,67 +108,67 @@ describe('Test - family-tree: search()', () => {
     familyTree.add('Natalia', Provider.search().daughter);
   });
   it('Mark Maternal-Aunt, should return "Hercilia"', () => {
-    const expected = 'Hercilia'
+    const expected = 'Hercilia';
     const received = familyTree.search('Mark', 'Maternal-Aunt');
     expect(received).toBe(expected);
   });
   it('Mark Paternal-Aunt, should return "NONE"', () => {
-    const expected = 'NONE'
+    const expected = 'NONE';
     const received = familyTree.search('Mark', 'Paternal-Aunt');
     expect(received).toBe(expected);
   });
   it('Nayreth Paternal-Uncle, should return "Rich"', () => {
-    const expected = 'Rich'
+    const expected = 'Rich';
     const received = familyTree.search('Nayreth', 'Paternal-Uncle');
     expect(received).toBe(expected);
   });
   it('Mark Maternal-Uncle, should return "Ruben Rich"', () => {
-    const expected = 'Ruben Rich'
+    const expected = 'Ruben Rich';
     const received = familyTree.search('Mark', 'Maternal-Uncle');
     expect(received).toBe(expected);
   });
   it('Ruben Daughter, should return "Nayreth"', () => {
-    const expected = 'Nayreth'
+    const expected = 'Nayreth';
     const received = familyTree.search('Ruben', 'Daughter');
     expect(received).toBe(expected);
   });
   it('Tamara Daughter, should return "Sabrina Hercilia"', () => {
-    const expected = 'Sabrina Hercilia'
+    const expected = 'Sabrina Hercilia';
     const received = familyTree.search('Tamara', 'Daughter');
     expect(received).toBe(expected);
   });
   it('Jordan Siblings, should return "NONE"', () => {
-    const expected = 'NONE'
+    const expected = 'NONE';
     const received = familyTree.search('Jordan', 'Siblings');
     expect(received).toBe(expected);
   });
   it('Rich Siblings, should return "Sabrina Ruben Hercilia"', () => {
-    const expected = 'Sabrina Ruben Hercilia'
+    const expected = 'Sabrina Ruben Hercilia';
     const received = familyTree.search('Rich', 'Siblings');
     expect(received).toBe(expected);
   });
   it('Rich Siblings, should return "Sabrina Ruben Hercilia"', () => {
-    const expected = 'Sabrina Ruben Hercilia'
+    const expected = 'Sabrina Ruben Hercilia';
     const received = familyTree.search('Rich', 'Siblings');
     expect(received).toBe(expected);
   });
   it('Sabrina Sister-In-Law, should return "Natalia"', () => {
-    const expected = 'Natalia'
+    const expected = 'Natalia';
     const received = familyTree.search('Sabrina', 'Sister-In-Law');
     expect(received).toBe(expected);
   });
   it('Ruben Brother-In-Law, should return "Jordan Daniel"', () => {
-    const expected = 'Jordan Daniel'
+    const expected = 'Jordan Daniel';
     const received = familyTree.search('Ruben', 'Brother-In-Law');
     expect(received).toBe(expected);
   });
   it('Jordan Son, should return "Mark"', () => {
-    const expected = 'Mark'
+    const expected = 'Mark';
     const received = familyTree.search('Jordan', 'Son');
     expect(received).toBe(expected);
   });
   it('Should return INVALID_RELATION, relation is not valid', () => {
-    const expected = 'INVALID_RELATION'
+    const expected = 'INVALID_RELATION';
     const received = familyTree.search('Jordan', 'SOME-INVALID-RELATION');
     expect(received).toBe(expected);
   });

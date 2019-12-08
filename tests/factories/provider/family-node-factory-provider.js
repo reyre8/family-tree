@@ -1,14 +1,13 @@
 module.exports = {
-  params: () => {
-    return {
+  params: () =>
+    ({
       member: {
         name: 'Reynaldo',
-        gender: 'Male'
+        gender: 'Male',
       },
       partner: {
         name: 'Tamara',
-        gender: 'Female'
-      }
-    }
-  }
-}
+        gender: 'Female',
+      },
+    }),
+};

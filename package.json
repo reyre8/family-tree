@@ -4,12 +4,20 @@
   "description": "GeekTrust Test for LEXICON",
   "main": "geektrust.js",
   "scripts": {
-    "test": "jest tests --verbose",
-    "start": "node geektrust.js"
+    "lint": "./node_modules/.bin/eslint .",
+    "lint-fix": "./node_modules/.bin/eslint --fix .",
+    "test": "npm run lint && jest tests --verbose",
+    "start": "npm run lint && node geektrust.js"
   },
   "author": "Reynaldo Rojas",
   "license": "ISC",
   "dependencies": {
     "jest": "^24.9.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.7.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
   }
 }

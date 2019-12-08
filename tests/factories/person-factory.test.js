@@ -4,7 +4,10 @@ const Provider = require('./provider/person-factory-provider');
 
 describe('Test - PersonFactory', () => {
   it('Should return an instance of Person', () => {
-    const person = PersonFactory(Provider.params().name, Provider.params().gender);
+    const person = PersonFactory(
+      Provider.params().name,
+      Provider.params().gender
+    );
     expect(person).toBeInstanceOf(Person);
   });
 });

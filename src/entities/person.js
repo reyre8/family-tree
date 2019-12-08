@@ -8,8 +8,8 @@ class Person {
   /**
    * Class constructor
    *
-   * @param {String} name Person name
-   * @param {String} gender Person gender [Male, Female]
+   * @param {String} name - Person name
+   * @param {String} gender - Person gender [Male, Female]
    */
   constructor(name, gender) {
     if (this.validate(name, gender)) {
@@ -24,7 +24,7 @@ class Person {
    * @return {Boolean} If person is Male returns true, otherwise false
    */
   isMale() {
-    return (this.gender === GENDER_MALE);
+    return this.gender === GENDER_MALE;
   }
 
   /**
@@ -33,25 +33,31 @@ class Person {
    * @return {Boolean} If person is Male returns true, otherwise false
    */
   isFemale() {
-    return (this.gender === GENDER_FEMALE);
+    return this.gender === GENDER_FEMALE;
   }
 
   /**
    * Verifies if the properties member and partner are valid
    *
-   * @param {String} name The name of the person
-   * @param {String} gender [Female, Male]
+   * @param {String} name - The name of the person
+   * @param {String} gender - [Female, Male]
    * @return {Boolean} true if there are no errors, otherwise,
    * it throws an Error
    */
-   validate(name, gender) {
-    if (!name)
+  validate(name, gender) {
+    if (!name) {
       throw Error('[PERSON_ERROR]-NAME_COMPULSORY');
-    if (!gender)
+    }
+
+    if (!gender) {
       throw Error('[PERSON_ERROR]-GENDER_COMPULSORY');
-    if(![GENDER_FEMALE, GENDER_MALE].includes(gender))
+    }
+
+    if (![GENDER_FEMALE, GENDER_MALE].includes(gender)) {
       throw Error('[PERSON_ERROR]-INVALID_GENDER');
-    return true
+    }
+
+    return true;
   }
 }
 

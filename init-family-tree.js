@@ -1,4 +1,4 @@
-const {member, partner} = require('./data/root-node');
+const { member, partner } = require('./data/root-node');
 const FamilyNodeFactory = require('./src/factories/family-node-factory');
 const FamilyTreeFactory = require('./src/factories/family-tree-factory');
 
@@ -8,6 +8,11 @@ const FamilyTreeFactory = require('./src/factories/family-tree-factory');
  * @return {FamilyTree} familyTree
  */
 module.exports = () => {
-  const familyNode = FamilyNodeFactory(member.name, member.gender, partner.name, partner.gender);
+  const familyNode = FamilyNodeFactory(
+    member.name,
+    member.gender,
+    partner.name,
+    partner.gender
+  );
   return FamilyTreeFactory(familyNode);
-}
+};
