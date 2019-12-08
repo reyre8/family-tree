@@ -70,12 +70,12 @@ lx
 
 In order to install the application, run the following command:
 ```sh
-npm install
+npm install --silent
 ```
 
 In order to execute the application, run  the following command:
 ```sh
-npm start [-- filePath]
+npm start --silent [-- filePath]
 ```
 Where `-- filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `data/default-input.txt`. This parameter can be found in the file `config.js`
 
