@@ -2,10 +2,14 @@
 #### *Applicant: Reynaldo Rojas*
 
 ### Requisites
-The test requires [Node.js](https://nodejs.org/) in order to run.
-No particular dependencies were used in the implementation.
+This application requires [Node.js](https://nodejs.org/) and npm (https://docs.npmjs.com/) in order to run (versions used).
+>Versions used in this build: node v11.10.0 - npm v6.7.0
 
-### Steps to test
+There are 2 main dependencies on this application
+- JestJS (https://jestjs.io/) for unit tests
+- ESLINT (https://eslint.org/) as linter, with airbnb
+
+### Steps to run the application
 Once the project folder has been unzipped, open a console, and navigate to the root of the projects folder. The structure of the project should be like the following:
 ```sh
 lx
@@ -68,18 +72,18 @@ lx
             └── person-factory-provider.js
 ```
 
-In order to install the application, run the following command:
+In order to install the application, execute the following command:
 ```sh
 npm install --silent
 ```
 
-In order to execute the application, run  the following command:
+In order to execute the application, execute the following command:
 ```sh
 npm start --silent [-- filePath]
 ```
 Where `-- filePath` is the path of the file to be tested. If the parameter `filePath` is not provided, the application will be run using the file `data/default-input.txt`. This parameter can be found in the file `config.js`
 
-In order to test the application, run the following command:
+In order to run the unit test suites, execute the following command:
 ```sh
 npm test
 ```
