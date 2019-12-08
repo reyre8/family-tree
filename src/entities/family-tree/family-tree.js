@@ -64,6 +64,10 @@ class FamilyTree {
     const parent = this.find(parentName);
     if (!parent) return message.get('ERR_1');
 
+    // Verify that the member does not exist
+    const member = this.find(familyNode.member.name);
+    if (member) return message.get('ERR_23', familyNode.member.name);
+
     const targetType = parent.member.name === parentName ? 'member' : 'partner';
     if (!parent[targetType].isFemale()) return message.get('ERR_2');
 

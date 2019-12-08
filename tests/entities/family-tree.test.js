@@ -95,6 +95,13 @@ describe('Test - family-tree: add()', () => {
     const received = familyTree.add('Reynaldo', newFamilyNode);
     expect(received).toBe(expected);
   });
+  it(`Should return ${message.get('ERR_23', 'Sabrina')},
+    if person already exist`, () => {
+    const expected = message.get('ERR_23', 'Sabrina');
+    familyTree.add('Tamara', newFamilyNode);
+    const received = familyTree.add('Tamara', newFamilyNode);
+    expect(received).toBe(expected);
+  });
 });
 
 describe('Test - family-tree: search()', () => {
