@@ -1,6 +1,6 @@
-const { member, partner } = require('./data/root-node');
-const FamilyNodeFactory = require('./src/factories/family-node-factory');
-const FamilyTreeFactory = require('./src/factories/family-tree-factory');
+const { member, partner } = require('./../data/root-node');
+const FamilyNodeFactory = require('./factories/family-node-factory');
+const FamilyTreeFactory = require('./factories/family-tree-factory');
 
 /**
  * Initialises a family tree with default data
