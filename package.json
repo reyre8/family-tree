@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
     "lint-fix": "./node_modules/.bin/eslint --fix .",
-    "test": "npm run lint && jest tests --verbose",
+    "test": "npm run lint && jest tests --verbose --runInBand",
     "start": "npm run lint && node geektrust.js"
   },
   "author": "Reynaldo Rojas",
