@@ -1,4 +1,5 @@
 const Person = require('./person');
+const message = require('./../libs/message');
 
 /**
  * Class that controls the nodes added to a family tree
@@ -50,15 +51,15 @@ class FamilyNode {
    */
   validate(member, partner) {
     if (!member) {
-      throw Error('[FAMILY_NODE_ERROR]-MEMBER_COMPULSORY');
+      throw Error(message.get('ERR_6'));
     }
 
     if (!(member instanceof Person)) {
-      throw Error('[FAMILY_NODE_ERROR]-MEMBER_INVALID_PERSON');
+      throw Error(message.get('ERR_7'));
     }
 
     if (partner && !(partner instanceof Person)) {
-      throw Error('[FAMILY_NODE_ERROR]-PARTNER_INVALID_PERSON');
+      throw Error(message.get('ERR_8'));
     }
 
     return true;

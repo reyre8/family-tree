@@ -1,6 +1,7 @@
 const FamilyTreeOperation =
   require('./../../src/entities/family-tree-operation');
 const Provider = require('./provider/family-tree-operation-provider');
+const message = require('./../../src/libs/message');
 
 /* eslint-disable no-new */
 describe('Test - family-tree-operation: constructor()', () => {
@@ -28,13 +29,13 @@ describe('Test - family-tree-operation: constructor()', () => {
     expect(() => {
       const familyTree = 'INVALID-FAMILY-TREE';
       new FamilyTreeOperation(familyTree);
-    }).toThrowError(Error('[FAMILY_TREE_OPERATION_ERROR]-INVALID_FAMILY_TREE'));
+    }).toThrowError(Error(message.get('ERR_19')));
   });
   it('Should throw Error, when familyTree is not provided.', () => {
     expect(() => {
       new FamilyTreeOperation();
     }).toThrowError(
-      Error('[FAMILY_TREE_OPERATION_ERROR]-FAMILY_TREE_COMPULSORY')
+      Error(message.get('ERR_18'))
     );
   });
 });
@@ -45,12 +46,12 @@ describe('Test - family-tree-operation: execute()', () => {
     familyTreeOperation = new FamilyTreeOperation(Provider.constructor());
   });
   it('Should execute ADD_CHILD operation', () => {
-    const expected = 'CHILD_ADDITION_SUCCEEDED';
+    const expected = message.get('SUC_1');
     const received = familyTreeOperation.execute(Provider.execute().addChild);
     expect(received).toBe(expected);
   });
   it('Should execute ADD_CHILD_WITH_PARTNER operation', () => {
-    const expected = 'CHILD_ADDITION_SUCCEEDED';
+    const expected = message.get('SUC_1');
     const received = familyTreeOperation.execute(
       Provider.execute().addChildWithPartner
     );
@@ -67,13 +68,13 @@ describe('Test - family-tree-operation: execute()', () => {
   it('Should throw Error, when operation is invalid.', () => {
     expect(() => {
       familyTreeOperation.execute(Provider.execute().invalid);
-    }).toThrowError(Error('INVALID_OPERATION'));
+    }).toThrowError(Error(message.get('ERR_13')));
   });
   it('Should throw Error, when operation is not an array.', () => {
     expect(() => {
       const operation = 'TEXT';
       familyTreeOperation.execute(operation);
-    }).toThrowError(Error('OPERATION_SHOULD_BE_ARRAY'));
+    }).toThrowError(Error(message.get('ERR_14')));
   });
 });
 
@@ -93,14 +94,14 @@ describe('Test - family-tree-operation: validateOperation()', () => {
       familyTreeOperation.validateOperation(
         Provider.validateOperation().invalid
       );
-    }).toThrowError(Error('INVALID_OPERATION'));
+    }).toThrowError(Error(message.get('ERR_13')));
   });
   it('Should throw Error, when ADD_CHILD has invalid arguments.', () => {
     expect(() => {
       familyTreeOperation.validateOperation(
         Provider.validateOperation().invalidAddChild
       );
-    }).toThrowError(Error('[ADD_CHILD_ERROR]-INVALID_ARGUMENT_NUMBER'));
+    }).toThrowError(Error(message.get('ERR_15')));
   });
   it('Should throw Error, when ADD_CHILD_WITH_PARTNER ' +
      'has invalid arguments.', () => {
@@ -108,13 +109,13 @@ describe('Test - family-tree-operation: validateOperation()', () => {
       familyTreeOperation.validateOperation(
         Provider.validateOperation().invalidAddChildWithPartner
       );
-    }).toThrowError(Error('[ADD_CHILD_WITH_PARTNER]-INVALID_ARGUMENT_NUMBER'));
+    }).toThrowError(Error(message.get('ERR_16')));
   });
   it('Should throw Error, when GET_RELATIONSHIP has invalid arguments.', () => {
     expect(() => {
       familyTreeOperation.validateOperation(
         Provider.validateOperation().invalidGetRelationship
       );
-    }).toThrowError(Error('[GET_RELATIONSHIP_ERROR]-INVALID_ARGUMENT_NUMBER'));
+    }).toThrowError(Error(message.get('ERR_17')));
   });
 });

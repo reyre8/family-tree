@@ -17,10 +17,10 @@ lx
 │   ├── initial-input.txt
 │   └── root-node.js
 ├── geektrust.js
-├── init-family-tree.js
 ├── package-lock.json
 ├── package.json
 ├── src
+│   ├── app.js
 │   ├── entities
 │   │   ├── family-node.js
 │   │   ├── family-tree
@@ -29,12 +29,17 @@ lx
 │   │   ├── family-tree-instruction.js
 │   │   ├── family-tree-operation.js
 │   │   └── person.js
-│   └── factories
-│       ├── family-node-factory.js
-│       ├── family-tree-factory.js
-│       ├── family-tree-instruction-factory.js
-│       ├── family-tree-operation-factory.js
-│       └── person-factory.js
+│   ├── factories
+│   │   ├── family-node-factory.js
+│   │   ├── family-tree-factory.js
+│   │   ├── family-tree-instruction-factory.js
+│   │   ├── family-tree-operation-factory.js
+│   │   └── person-factory.js
+│   ├── init-family-tree.js
+│   └── libs
+│       └── message
+│           ├── index.js
+│           └── lang.js
 └── tests
     ├── entities
     │   ├── family-node.test.js

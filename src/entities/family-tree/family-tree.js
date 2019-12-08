@@ -1,5 +1,6 @@
 const FamilyNode = require('./../family-node');
 const relationships = require('./relationship-matrix');
+const message = require('./../../libs/message');
 
 /**
  * Class that controls the family tree structure
@@ -61,14 +62,14 @@ class FamilyTree {
    */
   add(parentName, familyNode) {
     const parent = this.find(parentName);
-    if (!parent) return 'PERSON_NOT_FOUND';
+    if (!parent) return message.get('ERR_1');
 
     const targetType = parent.member.name === parentName ? 'member' : 'partner';
-    if (!parent[targetType].isFemale()) return 'CHILD_ADDITION_FAILED';
+    if (!parent[targetType].isFemale()) return message.get('ERR_2');
 
     familyNode.parent = parent;
     parent.children.push(familyNode);
-    return 'CHILD_ADDITION_SUCCEEDED';
+    return message.get('SUC_1');
   }
 
   /**
@@ -82,11 +83,11 @@ class FamilyTree {
    */
   search(name, relation) {
     if (!Object.prototype.hasOwnProperty.call(relationships, relation)) {
-      return 'INVALID_RELATION';
+      return message.get('ERR_3');
     }
 
     const targetNode = this.find(name);
-    if (!targetNode) return 'PERSON_NOT_FOUND';
+    if (!targetNode) return message.get('ERR_1');
 
     const targetType = targetNode.member.name === name ? 'partner' : 'member';
     const targetParent = targetNode.findAncestor(
@@ -98,7 +99,7 @@ class FamilyTree {
       targetParent,
       targetType
     );
-    return result.length > 0 ? result.join(' ') : 'NONE';
+    return result.length > 0 ? result.join(' ') : message.get('SUC_2');
   }
 
   /**
@@ -152,7 +153,7 @@ class FamilyTree {
 
             break;
           default:
-            throw Error('INVALID_RELATION');
+            throw Error(message.get('ERR_3'));
         }
       }
     });
@@ -167,11 +168,11 @@ class FamilyTree {
    */
   validate(familyNode) {
     if (!familyNode) {
-      throw Error('[FAMILY_TREE_ERROR]-NAME_COMPULSORY');
+      throw Error(message.get('ERR_4'));
     }
 
     if (!(familyNode instanceof FamilyNode)) {
-      throw Error('[FAMILY_TREE_ERROR]-INVALID_FAMILY_NODE');
+      throw Error(message.get('ERR_5'));
     }
 
     return true;

@@ -1,5 +1,10 @@
 const FamilyTree = require('./family-tree/family-tree');
 const FamilyNodeFactory = require('./../factories/family-node-factory');
+const message = require('./../libs/message');
+
+const OP_ADD_CHILD = 'ADD_CHILD';
+const OP_ADD_CHILD_WITH_PARTNER = 'ADD_CHILD_WITH_PARTNER';
+const OP_GET_RELATIONSHIP = 'GET_RELATIONSHIP';
 
 /**
  * Class that controls the operation performed on a FamilyTree Object
@@ -29,12 +34,12 @@ class FamilyTreeOperation {
     }
 
     switch (operation[0]) {
-      case 'ADD_CHILD':
+      case OP_ADD_CHILD:
         return this.familyTree.add(
           operation[1],
           FamilyNodeFactory(operation[2], operation[3])
         );
-      case 'ADD_CHILD_WITH_PARTNER':
+      case OP_ADD_CHILD_WITH_PARTNER:
         return this.familyTree.add(
           operation[1],
           FamilyNodeFactory(
@@ -44,10 +49,10 @@ class FamilyTreeOperation {
             operation[5]
           )
         );
-      case 'GET_RELATIONSHIP':
+      case OP_GET_RELATIONSHIP:
         return this.familyTree.search(operation[1], operation[2]);
       default:
-        return 'INVALID_OPERATION';
+        return message.get('ERR_13');
     }
   }
 
@@ -60,30 +65,30 @@ class FamilyTreeOperation {
    */
   validateOperation(operation) {
     if (!Array.isArray(operation)) {
-      throw Error('OPERATION_SHOULD_BE_ARRAY');
+      throw Error(message.get('ERR_14'));
     }
 
     switch (operation[0]) {
-      case 'ADD_CHILD':
+      case OP_ADD_CHILD:
         if (operation.length !== 4) {
-          throw Error('[ADD_CHILD_ERROR]-INVALID_ARGUMENT_NUMBER');
+          throw Error(message.get('ERR_15'));
         }
 
         break;
-      case 'ADD_CHILD_WITH_PARTNER':
+      case OP_ADD_CHILD_WITH_PARTNER:
         if (operation.length !== 6) {
-          throw Error('[ADD_CHILD_WITH_PARTNER]-INVALID_ARGUMENT_NUMBER');
+          throw Error(message.get('ERR_16'));
         }
 
         break;
-      case 'GET_RELATIONSHIP':
+      case OP_GET_RELATIONSHIP:
         if (operation.length !== 3) {
-          throw Error('[GET_RELATIONSHIP_ERROR]-INVALID_ARGUMENT_NUMBER');
+          throw Error(message.get('ERR_17'));
         }
 
         break;
       default:
-        throw Error('INVALID_OPERATION');
+        throw Error(message.get('ERR_13'));
     }
 
     return null;
@@ -97,11 +102,11 @@ class FamilyTreeOperation {
    */
   validate(familyTree) {
     if (!familyTree) {
-      throw Error('[FAMILY_TREE_OPERATION_ERROR]-FAMILY_TREE_COMPULSORY');
+      throw Error(message.get('ERR_18'));
     }
 
     if (!(familyTree instanceof FamilyTree)) {
-      throw Error('[FAMILY_TREE_OPERATION_ERROR]-INVALID_FAMILY_TREE');
+      throw Error(message.get('ERR_19'));
     }
 
     return true;

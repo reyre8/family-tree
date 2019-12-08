@@ -1,6 +1,7 @@
 const FamilyTreeInstruction =
   require('./../../src/entities/family-tree-instruction');
 const Provider = require('./provider/family-tree-instruction-provider');
+const message = require('./../../src/libs/message');
 
 /* eslint-disable no-new */
 describe('Test - family-tree-instruction: constructor()', () => {
@@ -36,14 +37,14 @@ describe('Test - family-tree-instruction: constructor()', () => {
         familyTreeOperation
       );
     }).toThrowError(
-      Error('[FAMILY_TREE_INSTRUCTION_ERROR]-INVALID_FAMILY_TREE_OPERATION')
+      Error(message.get('ERR_12'))
     );
   });
   it('Should throw Error, when familyTreeOperation is not provided.', () => {
     expect(() => {
       new FamilyTreeInstruction();
     }).toThrowError(
-      Error('[FAMILY_TREE_INSTRUCTION_ERROR]-FAMILY_TREE_OPERATION_COMPULSORY')
+      Error(message.get('ERR_11'))
     );
   });
 });
@@ -68,7 +69,7 @@ describe('Test - family-tree-instruction: formatInstructionLine()', () => {
   it('Should throw Error, when line is not a valid string.', () => {
     expect(() => {
       familyTreeInstruction.formatInstructionLine(false);
-    }).toThrowError(Error('INVALID_LINE'));
+    }).toThrowError(Error(message.get('ERR_10')));
   });
 });
 
@@ -78,7 +79,7 @@ describe('Test - family-tree-instruction: processInstructionLine()', () => {
     familyTreeInstruction = new FamilyTreeInstruction(Provider.constructor());
   });
   it('Should return CHILD_ADDITION_SUCCEEDED', () => {
-    const expected = 'CHILD_ADDITION_SUCCEEDED';
+    const expected = message.get('SUC_1');
     const received = familyTreeInstruction.processInstructionLine(
       Provider.processInstructionLine()
     );
@@ -107,7 +108,7 @@ describe('Test - family-tree-instruction: readFile()', () => {
         Provider.readFile().invalidPath
       );
     }).toThrowError(
-      Error(`FILE_NOT_FOUND: ${Provider.readFile().invalidPath}`)
+      Error(message.get('ERR_9', Provider.readFile().invalidPath))
     );
   });
 });
@@ -118,7 +119,7 @@ describe('Test - family-tree-instruction: processFromFile()', () => {
     familyTreeInstruction = new FamilyTreeInstruction(Provider.constructor());
   });
   it('Should return Array with outcome of the instructions processed.', () => {
-    const expected = ['CHILD_ADDITION_SUCCEEDED', 'Sabrina'];
+    const expected = [message.get('SUC_1'), 'Sabrina'];
     const received = familyTreeInstruction.processFromFile(
       Provider.processFromFile().filePath
     );

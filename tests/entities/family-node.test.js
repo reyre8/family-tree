@@ -1,5 +1,6 @@
 const FamilyNode = require('./../../src/entities/family-node');
 const Provider = require('./provider/family-node-provider');
+const message = require('./../../src/libs/message');
 
 /* eslint-disable no-new */
 describe('Test - family-node: constructor()', () => {
@@ -20,18 +21,18 @@ describe('Test - family-node: constructor()', () => {
     expect(() => {
       const member = 'INVALID-PERSON-OBJECT';
       new FamilyNode(member);
-    }).toThrowError(Error('[FAMILY_NODE_ERROR]-MEMBER_INVALID_PERSON'));
+    }).toThrowError(Error(message.get('ERR_7')));
   });
   it('Should throw Error, when member is not provided.', () => {
     expect(() => {
       new FamilyNode();
-    }).toThrowError(Error('[FAMILY_NODE_ERROR]-MEMBER_COMPULSORY'));
+    }).toThrowError(Error(message.get('ERR_6')));
   });
   it('Should throw Error, when partner is not invalid.', () => {
     expect(() => {
       const partner = 'INVALID-PERSON-OBJECT';
       new FamilyNode(Provider.constructor(), partner);
-    }).toThrowError(Error('[FAMILY_NODE_ERROR]-PARTNER_INVALID_PERSON'));
+    }).toThrowError(Error(message.get('ERR_8')));
   });
 });
 

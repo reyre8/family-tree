@@ -1,3 +1,5 @@
+const message = require('./../libs/message');
+
 const GENDER_MALE = 'Male';
 const GENDER_FEMALE = 'Female';
 
@@ -46,15 +48,15 @@ class Person {
    */
   validate(name, gender) {
     if (!name) {
-      throw Error('[PERSON_ERROR]-NAME_COMPULSORY');
+      throw Error(message.get('ERR_20'));
     }
 
     if (!gender) {
-      throw Error('[PERSON_ERROR]-GENDER_COMPULSORY');
+      throw Error(message.get('ERR_21'));
     }
 
     if (![GENDER_FEMALE, GENDER_MALE].includes(gender)) {
-      throw Error('[PERSON_ERROR]-INVALID_GENDER');
+      throw Error(message.get('ERR_22'));
     }
 
     return true;

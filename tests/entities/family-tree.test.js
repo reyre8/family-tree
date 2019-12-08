@@ -1,5 +1,6 @@
 const FamilyTree = require('./../../src/entities/family-tree/family-tree');
 const Provider = require('./provider/family-tree-provider');
+const message = require('./../../src/libs/message');
 
 /* eslint-disable no-new */
 describe('Test - family-tree: constructor()', () => {
@@ -22,12 +23,12 @@ describe('Test - family-tree: constructor()', () => {
     expect(() => {
       const familyNode = 'INVALID-FAMILY-NODE';
       new FamilyTree(familyNode);
-    }).toThrowError(Error('[FAMILY_TREE_ERROR]-INVALID_FAMILY_NODE'));
+    }).toThrowError(Error(message.get('ERR_5')));
   });
   it('Should throw Error, when familyNode is not provided.', () => {
     expect(() => {
       new FamilyTree();
-    }).toThrowError(Error('[FAMILY_TREE_ERROR]-NAME_COMPULSORY'));
+    }).toThrowError(Error(message.get('ERR_4')));
   });
 });
 
@@ -53,11 +54,11 @@ describe('Test - family-tree: find()', () => {
   });
   it('Should match find node where member: Reynaldo', () => {
     const received = familyTree.find('Reynaldo');
-    expect(received).toMatchObject(familyTree._root);
+    expect(received).toMatchObject(Provider.find());
   });
   it('Should match find node where partner: Tamara', () => {
     const received = familyTree.find('Tamara');
-    expect(received).toMatchObject(familyTree._root);
+    expect(received).toMatchObject(Provider.find());
   });
   it('Should return null if name is not found as member/partner', () => {
     const received = familyTree.find('Daniel');
@@ -72,8 +73,8 @@ describe('Test - family-tree: add()', () => {
     familyTree = new FamilyTree(Provider.add().parent);
     newFamilyNode = Provider.add().child;
   });
-  it('Should match CHILD_ADDITION_SUCCEEDED', () => {
-    const expected = 'CHILD_ADDITION_SUCCEEDED';
+  it(`Should match ${message.get('SUC_1')}`, () => {
+    const expected = message.get('SUC_1');
     const received = familyTree.add('Tamara', newFamilyNode);
     expect(received).toBe(expected);
   });
@@ -84,13 +85,13 @@ describe('Test - family-tree: add()', () => {
     const received = `${node.member.name}-${node.member.gender}`;
     expect(received).toBe(expected);
   });
-  it('Should return PERSON_NOT_FOUND, if person is not found', () => {
-    const expected = 'PERSON_NOT_FOUND';
+  it(`Should return ${message.get('ERR_1')}, if person is not found`, () => {
+    const expected = message.get('ERR_1');
     const received = familyTree.add('Daniela', newFamilyNode);
     expect(received).toBe(expected);
   });
-  it('Should return CHILD_ADDITION_FAILED, if person is not Female', () => {
-    const expected = 'CHILD_ADDITION_FAILED';
+  it(`Should return ${message.get('ERR_2')}, if person is not Female`, () => {
+    const expected = message.get('ERR_2');
     const received = familyTree.add('Reynaldo', newFamilyNode);
     expect(received).toBe(expected);
   });
@@ -137,8 +138,8 @@ describe('Test - family-tree: search()', () => {
     const received = familyTree.search('Tamara', 'Daughter');
     expect(received).toBe(expected);
   });
-  it('Jordan Siblings, should return "NONE"', () => {
-    const expected = 'NONE';
+  it(`Jordan Siblings, should return "${message.get('SUC_2')}"`, () => {
+    const expected = message.get('SUC_2');
     const received = familyTree.search('Jordan', 'Siblings');
     expect(received).toBe(expected);
   });
@@ -167,13 +168,13 @@ describe('Test - family-tree: search()', () => {
     const received = familyTree.search('Jordan', 'Son');
     expect(received).toBe(expected);
   });
-  it('Should return INVALID_RELATION, relation is not valid', () => {
-    const expected = 'INVALID_RELATION';
+  it(`Should return ${message.get('ERR_3')}, if relation is not valid`, () => {
+    const expected = message.get('ERR_3');
     const received = familyTree.search('Jordan', 'SOME-INVALID-RELATION');
     expect(received).toBe(expected);
   });
-  it('Should return PERSON_NOT_FOUND, if person is not found', () => {
-    const expected = 'PERSON_NOT_FOUND';
+  it(`Should return ${message.get('ERR_1')}, if person is not found`, () => {
+    const expected = message.get('ERR_1');
     const received = familyTree.search('Clark', 'Son');
     expect(received).toBe(expected);
   });

@@ -1,5 +1,7 @@
 const fs = require('fs');
 const FamilyTreeOperation = require('./family-tree-operation');
+const message = require('./../libs/message');
+const config = require('./../../config');
 
 /**
  * Class that controls the instructions performed
@@ -38,11 +40,11 @@ class FamilyTreeInstruction {
    */
   readFile(filePath) {
     if (!fs.existsSync(filePath)) {
-      throw Error(`FILE_NOT_FOUND: ${filePath}`);
+      throw Error(message.get('ERR_9', filePath));
     }
 
     return fs
-      .readFileSync(filePath, 'utf-8')
+      .readFileSync(filePath, config.fileEncoding)
       .split('\n')
       .filter(Boolean);
   }
@@ -65,7 +67,7 @@ class FamilyTreeInstruction {
    * @return {Array} Instructions as an array
    */
   formatInstructionLine(line) {
-    if (typeof line !== 'string') throw Error(`INVALID_LINE`);
+    if (typeof line !== 'string') throw Error(message.get('ERR_10'));
     const matches = line.match(/(?:[^\s"]+|"[^"]*")+/g);
     if (Array.isArray(matches)) {
       return matches.map((item) =>
@@ -83,15 +85,11 @@ class FamilyTreeInstruction {
    */
   validate(familyTreeOperation) {
     if (!familyTreeOperation) {
-      throw Error(
-        '[FAMILY_TREE_INSTRUCTION_ERROR]-FAMILY_TREE_OPERATION_COMPULSORY'
-      );
+      throw Error(message.get('ERR_11'));
     }
 
     if (!(familyTreeOperation instanceof FamilyTreeOperation)) {
-      throw Error(
-        '[FAMILY_TREE_INSTRUCTION_ERROR]-INVALID_FAMILY_TREE_OPERATION'
-      );
+      throw Error(message.get('ERR_12'));
     }
 
     return true;

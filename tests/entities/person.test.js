@@ -1,4 +1,5 @@
 const Person = require('./../../src/entities/person');
+const message = require('./../../src/libs/message');
 
 /* eslint-disable no-new */
 describe('Test - person: constructor()', () => {
@@ -13,16 +14,16 @@ describe('Test - person: constructor()', () => {
   it('Should throw Error, when name is not provided.', () => {
     expect(() => {
       new Person();
-    }).toThrowError(Error('[PERSON_ERROR]-NAME_COMPULSORY'));
+    }).toThrowError(Error(message.get('ERR_20')));
   });
   it('Should throw Error, when gender is not provided.', () => {
     expect(() => {
       new Person('Reynaldo');
-    }).toThrowError(Error('[PERSON_ERROR]-GENDER_COMPULSORY'));
+    }).toThrowError(Error(message.get('ERR_21')));
   });
   it('Should throw Error, gender is invalid.', () => {
     expect(() => {
       new Person('Reynaldo', 'Invalid-Gender');
-    }).toThrowError(Error('[PERSON_ERROR]-INVALID_GENDER'));
+    }).toThrowError(Error(message.get('ERR_22')));
   });
 });
