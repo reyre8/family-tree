@@ -2,7 +2,7 @@
 #### *Applicant: Reynaldo Rojas*
 
 ### Requisites
-This application requires [Node.js](https://nodejs.org/) and npm (https://docs.npmjs.com/) in order to run (versions used).
+This application requires [Node.js](https://nodejs.org/) and npm (https://docs.npmjs.com/) in order to run.
 >Versions used in this build: node v11.10.0 - npm v6.7.0
 
 There are 2 main dependencies on this application
