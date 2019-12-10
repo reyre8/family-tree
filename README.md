@@ -11,7 +11,7 @@ There are 2 main dependencies on this application
 ### Steps to run the application
 Once the project folder has been cloned, open a console, and navigate to the root of the projects folder. The structure of the project should be like the following:
 ```sh
-lx
+family-tree
 ├── .eslintrc.json
 ├── README.md
 ├── config.js
